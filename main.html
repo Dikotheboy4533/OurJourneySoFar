@@ -12,6 +12,26 @@
       color:#333;
       overflow-x:hidden;
     }
+
+    /* Intro Splash */
+    #intro {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-family:'Great Vibes', cursive;
+      font-size:2em;
+      z-index:9999;
+      animation: fadeOut 4s ease forwards;
+      animation-delay:3s;
+    }
+    @keyframes fadeOut { to { opacity:0; visibility:hidden; } }
+
     header {
       text-align:center;
       padding:120px 20px;
@@ -31,6 +51,7 @@
       margin-top:20px;
       animation: fadeIn 5s ease-in-out;
     }
+
     .chapter {
       margin:80px auto;
       padding:40px;
@@ -38,7 +59,6 @@
       background:white;
       border-radius:20px;
       box-shadow:0 0 30px rgba(255,100,150,0.3);
-      animation: slideUp 2s;
       position:relative;
     }
     .chapter h2 {
@@ -52,9 +72,9 @@
       box-shadow:0 0 15px rgba(0,0,0,0.2);
       width:200px;
       transition:transform 0.5s;
-      animation: fadeIn 2s ease-in-out;
     }
     .chapter img:hover { transform:scale(1.1); }
+
     .postit {
       position:absolute;
       right:-70px;
@@ -67,6 +87,7 @@
       box-shadow:0 5px 15px rgba(0,0,0,0.2);
       animation: float 4s infinite ease-in-out;
     }
+
     .flower {
       font-size:3em;
       cursor:pointer;
@@ -76,12 +97,13 @@
       animation: sway 3s infinite ease-in-out;
     }
     .flower:hover { transform:scale(1.4) rotate(10deg); color:pink; text-shadow:0 0 20px hotpink; }
+
     .note {
       display:none;
       font-style:italic;
       margin-top:8px;
       color:#b03060;
-      font-size:0.65em;
+      font-size:0.65em; /* smaller, elegant */
       opacity:0;
       transform:translateY(5px);
       transition:opacity 0.8s ease, transform 0.8s ease;
@@ -93,6 +115,7 @@
       opacity:1;
       transform:translateY(0);
     }
+
     .finale {
       background:url('rosebg.jpg') no-repeat center/cover;
       padding:150px 20px;
@@ -126,8 +149,9 @@
       opacity: 0;
       color: #ffb6c1;
     }
+
+    /* Animations */
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
-    @keyframes slideUp { from{transform:translateY(50px);opacity:0;} to{transform:translateY(0);opacity:1;} }
     @keyframes glow { from{text-shadow:0 0 10px pink;} to{text-shadow:0 0 30px red;} }
     @keyframes sway { 0%{transform:rotate(-5deg);} 50%{transform:rotate(5deg);} 100%{transform:rotate(-5deg);} }
     @keyframes float { 0%{transform:translateY(0);} 50%{transform:translateY(-10px);} 100%{transform:translateY(0);} }
@@ -137,9 +161,26 @@
       10% { opacity:1; }
       100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
     }
+
+    /* Scroll-triggered fade */
+    .fade-section {
+      opacity:0;
+      transform:translateY(40px);
+      transition:opacity 1s ease, transform 1s ease;
+    }
+    .fade-section.visible {
+      opacity:1;
+      transform:translateY(0);
+    }
   </style>
 </head>
 <body>
+
+  <!-- Intro Splash -->
+  <div id="intro">
+    <h1>🌸 Our Journey So Far 🌸</h1>
+    <p>Every path leads to you...</p>
+  </div>
 
   <!-- Background Music -->
   <audio autoplay loop>
@@ -152,7 +193,7 @@
   </header>
 
   <!-- Week 1 -->
-  <div class="chapter">
+  <div class="chapter fade-section">
     <h2>Week 1</h2>
     <p>💌 Our first surprise together.</p>
     <img src="week1a.jpg" alt="Week 1 memory 1">
@@ -162,7 +203,7 @@
   </div>
 
   <!-- Week 2 -->
-  <div class="chapter">
+  <div class="chapter fade-section">
     <h2>Week 2</h2>
     <p>🎥 A memory we shared.</p>
     <div>
@@ -182,7 +223,7 @@
   </div>
 
   <!-- Week 3 Flowers -->
-  <div class="chapter">
+  <div class="chapter fade-section">
     <h2>Week 3</h2>
     <p>🌹 Click the flowers to reveal my love notes.</p>
     <div class="flower" onclick="showNote(this)">🌹<div class="note">I love your smile</div></div>
@@ -193,8 +234,8 @@
     <div class="flower" onclick="showNote(this)">🌸<div class="note">You are my forever</div></div>
   </div>
 
-    <!-- Finale -->
-  <div class="finale">
+  <!-- Finale -->
+  <div class="finale fade-section">
     <h2>🌹 A boy waits with a flower...</h2>
     <p>"No matter the path, it always leads to you."</p>
     <img src="boy.png" width="150" alt="Boy holding flower">
@@ -227,8 +268,21 @@
       setTimeout(()=>{ lily.remove(); }, 10000);
     }
     setInterval(createLily, 1000); // one lily per second
+
+    // Scroll-triggered fade animations
+    const sections = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
 </html>
-
