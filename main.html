@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Journey So Far</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin:0;
+      font-family:'Poppins', sans-serif;
+      background: linear-gradient(to bottom,#ffdde1,#ee9ca7);
+      color:#333;
+      overflow-x:hidden;
+    }
+
+    /* Intro Splash */
+    #intro {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      font-family:'Great Vibes', cursive;
+      font-size:2em;
+      z-index:9999;
+      animation: fadeOut 4s ease forwards;
+      animation-delay:3s;
+    }
+    @keyframes fadeOut { to { opacity:0; visibility:hidden; } }
+
+    header {
+      text-align:center;
+      padding:120px 20px;
+      background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+      color:white;
+      position:relative;
+      overflow:hidden;
+    }
+    header h1 {
+      font-family:'Great Vibes', cursive;
+      font-size:4em;
+      text-shadow:0 0 20px pink;
+      animation: glow 3s infinite alternate;
+    }
+    header p {
+      font-size:1.5em;
+      margin-top:20px;
+      animation: fadeIn 5s ease-in-out;
+    }
+
+    .chapter {
+      margin:80px auto;
+      padding:40px;
+      width:85%;
+      background:white;
+      border-radius:20px;
+      box-shadow:0 0 30px rgba(255,100,150,0.3);
+      position:relative;
+    }
+    .chapter h2 {
+      font-family:'Great Vibes', cursive;
+      font-size:2.5em;
+      color:#d6336c;
+    }
+    .chapter img {
+      margin:15px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.2);
+      width:200px;
+      transition:transform 0.5s;
+    }
+    .chapter img:hover { transform:scale(1.1); }
+
+    .postit {
+      position:absolute;
+      right:-70px;
+      top:40px;
+      width:160px;
+      background:#fff8b3;
+      padding:12px;
+      font-style:italic;
+      transform:rotate(-5deg);
+      box-shadow:0 5px 15px rgba(0,0,0,0.2);
+      animation: float 4s infinite ease-in-out;
+    }
+
+    .flower {
+      font-size:3em;
+      cursor:pointer;
+      transition:0.5s;
+      display:inline-block;
+      margin:20px;
+      animation: sway 3s infinite ease-in-out;
+    }
+    .flower:hover { transform:scale(1.4) rotate(10deg); color:pink; text-shadow:0 0 20px hotpink; }
+
+    .note {
+      display:none;
+      font-style:italic;
+      margin-top:8px;
+      color:#b03060;
+      font-size:0.65em; /* smaller, elegant */
+      opacity:0;
+      transform:translateY(5px);
+      transition:opacity 0.8s ease, transform 0.8s ease;
+      font-family:'Great Vibes', cursive;
+      letter-spacing:1px;
+    }
+    .note.show {
+      display:block;
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .finale {
+      background:url('rosebg.jpg') no-repeat center/cover;
+      padding:150px 20px;
+      text-align:center;
+      color:white;
+      position:relative;
+      overflow:hidden;
+    }
+    .finale h2 {
+      font-family:'Great Vibes', cursive;
+      font-size:3em;
+      animation: glow 3s infinite alternate;
+    }
+    .finale p {
+      font-size:1.5em;
+      margin-top:20px;
+      animation: fadeIn 4s ease-in-out;
+    }
+    .sparkle {
+      position:absolute;
+      width:8px; height:8px;
+      background:white;
+      border-radius:50%;
+      animation: sparkle 5s infinite;
+    }
+    .lily {
+      position: fixed;
+      top: -50px;
+      font-size: 1.2em;
+      animation: fall linear forwards;
+      opacity: 0;
+      color: #ffb6c1;
+    }
+
+    /* Animations */
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes glow { from{text-shadow:0 0 10px pink;} to{text-shadow:0 0 30px red;} }
+    @keyframes sway { 0%{transform:rotate(-5deg);} 50%{transform:rotate(5deg);} 100%{transform:rotate(-5deg);} }
+    @keyframes float { 0%{transform:translateY(0);} 50%{transform:translateY(-10px);} 100%{transform:translateY(0);} }
+    @keyframes sparkle { 0%{opacity:0; transform:translateY(0);} 50%{opacity:1; transform:translateY(-50px);} 100%{opacity:0; transform:translateY(0);} }
+    @keyframes fall {
+      0% { transform: translateY(-50px); opacity:0; }
+      10% { opacity:1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity:0; }
+    }
+
+    /* Scroll-triggered fade */
+    .fade-section {
+      opacity:0;
+      transform:translateY(40px);
+      transition:opacity 1s ease, transform 1s ease;
+    }
+    .fade-section.visible {
+      opacity:1;
+      transform:translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Splash -->
+  <div id="intro">
+    <h1>🌸 Our Journey So Far 🌸</h1>
+    <p></p>
+  </div>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1>🌸 Our Journey So Far 🌸</h1>
+    <p>Three weeks, babe.. A Lifetime to go.</p>
+  </header>
+
+  <!-- Week 1 -->
+  <div class="chapter fade-section">
+    <h2>Week 1</h2>
+    <p>The Beginning of our True Love Story</p>
+    <img src="week1a.jpg" alt="Week 1 memory 1">
+    <img src="week1b.jpg" alt="Week 1 memory 2">
+    <img src="week1c.jpg" alt="Week 1 memory 3">
+    <div class="postit">"I was giggling and smiling all the time"</div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="chapter fade-section">
+    <h2>Week 2</h2>
+    <p>Falling even harder for each other..</p>
+    <div>
+      <img src="week2a.jpg" alt="Week 2 photo 1">
+      <img src="week2b.jpg" alt="Week 2 photo 2">
+      <img src="week2c.jpg" alt="Week 2 photo 3">
+      <img src="week2d.jpg" alt="Week 2 photo 4">
+      <img src="week2e.jpg" alt="Week 2 photo 5">
+      <img src="week2f.jpg" alt="Week 2 photo 6">
+      <img src="week2g.jpg" alt="Week 2 photo 7">
+      <img src="week2h.jpg" alt="Week 2 photo 8">
+      <img src="week2i.jpg" alt="Week 2 photo 9">
+      <img src="week2j.jpg" alt="Week 2 photo 10">
+    </div>
+    <div class="postit">"Love was in the air.."</div>
+    <div class="postit" style="top:150px; right:-80px;">"I’ll never forget these moments.."</div>
+  </div>
+
+  <!-- Week 3 Flowers -->
+  <div class="chapter fade-section">
+    <h2>Week 3</h2>
+    <p>🌹 Click the flowers to reveal my love notes.</p>
+    <div class="flower" onclick="showNote(this)">🌹<div class="note">I love your smile</div></div>
+    <div class="flower" onclick="showNote(this)">🌼<div class="note">I love how caring you are</div></div>
+    <div class="flower" onclick="showNote(this)">🌻<div class="note">I love your honesty</div></div>
+    <div class="flower" onclick="showNote(this)">🌷<div class="note">I love your playfulness</div></div>
+    <div class="flower" onclick="showNote(this)">🌺<div class="note">I love your confidence</div></div>
+    <div class="flower" onclick="showNote(this)">🌸<div class="note">I LOVE YOU</div></div>
+  </div>
+
+  <!-- Finale -->
+  <div class="finale fade-section">
+    <h2>No matter what throws us down, We will always pick each other up, because true love is never easy..</h2>
+    <p>Every day, every minute, every lifetime, I'd choose you over and over again.. because you, are evrything I could ever ask for..</p>
+    <img src="boy.png" width="150" alt="Boy holding flower">
+
+    <!-- Sparkles -->
+    <div class="sparkle" style="left:20%;top:30%;"></div>
+    <div class="sparkle" style="left:50%;top:50%;"></div>
+    <div class="sparkle" style="left:70%;top:20%;"></div>
+    <div class="sparkle" style="left:40%;top:70%;"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Flower click reveal
+    function showNote(flowerDiv){
+      const note = flowerDiv.querySelector('.note');
+      if(!note.classList.contains('show')){
+        note.classList.add('show');
+      }
+    }
+
+    // Falling lilies 🌸
+    function createLily(){
+      const lily = document.createElement('div');
+      lily.className = 'lily';
+      lily.textContent = '🌸';
+      lily.style.left = Math.random() * window.innerWidth + 'px';
+      lily.style.animationDuration = (5 + Math.random()*5) + 's';
+      document.body.appendChild(lily);
+      setTimeout(()=>{ lily.remove(); }, 10000);
+    }
+    setInterval(createLily, 1000); // one lily per second
+
+    // Scroll-triggered fade animations
+    const sections = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+
+</body>
+</html>
 
