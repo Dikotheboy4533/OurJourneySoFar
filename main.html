@@ -76,7 +76,23 @@
       animation: sway 3s infinite ease-in-out;
     }
     .flower:hover { transform:scale(1.4) rotate(10deg); color:pink; text-shadow:0 0 20px hotpink; }
-    .note { display:none; font-style:italic; margin-top:10px; color:#d6336c; font-size:1.2em; }
+    .note {
+      display:none;
+      font-style:italic;
+      margin-top:8px;
+      color:#b03060;
+      font-size:0.95em;
+      opacity:0;
+      transform:translateY(5px);
+      transition:opacity 0.8s ease, transform 0.8s ease;
+      font-family:'Great Vibes', cursive;
+      letter-spacing:1px;
+    }
+    .note.show {
+      display:block;
+      opacity:1;
+      transform:translateY(0);
+    }
     .finale {
       background:url('rosebg.jpg') no-repeat center/cover;
       padding:150px 20px;
@@ -105,9 +121,10 @@
     .lily {
       position: fixed;
       top: -50px;
-      font-size: 1.5em;
+      font-size: 1.2em;
       animation: fall linear forwards;
       opacity: 0;
+      color: #ffb6c1;
     }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
     @keyframes slideUp { from{transform:translateY(50px);opacity:0;} to{transform:translateY(0);opacity:1;} }
@@ -194,15 +211,8 @@
     // Flower click reveal
     function showNote(flowerDiv){
       const note = flowerDiv.querySelector('.note');
-      if(note.style.display !== 'block'){
-        note.style.display = 'block';
-        note.style.opacity = 0;
-        let opacity = 0;
-        const fade = setInterval(()=>{
-          opacity += 0.05;
-          note.style.opacity = opacity;
-          if(opacity >= 1) clearInterval(fade);
-        }, 50);
+      if(!note.classList.contains('show')){
+        note.classList.add('show');
       }
     }
 
@@ -221,3 +231,4 @@
 
 </body>
 </html>
+
